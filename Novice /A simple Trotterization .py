@@ -19,10 +19,12 @@ def trotterize(alpha, beta, time, depth):
         (numpy.array): The probabilities of measuring each computational basis state.
     """
 
-
     # Put your code here #
+    for i in range(depth):
+        qml.IsingXX(2*alpha*time/depth, wires = [0,1])
+        qml.IsingZZ(2*beta*time/depth, wires = [0,1])
     # Return the probabilities
-
+    return qml.probs(wires=[0, 1])
 
 # These functions are responsible for testing the solution.
 def run(test_case_input: str) -> str:
