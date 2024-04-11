@@ -17,14 +17,31 @@ def compute_hessian(num_wires, w):
         Union(tuple, np.ndarray): A matrix representing the Hessian calculated via 
         qml.gradients.parameter_shift_hessian
     """
-    
-
-
     # Define your device and QNode
-    
-    # Return the Hessian using qml.gradient.param_shift_hessian
-    
+    dev = qml.device('default.qubit', wires=num_wires)
 
+    @qml.qnode(dev)
+    # Return the Hessian using qml.gradient.param_shift_hessian
+    def qc(params):
+        for i in range(num_wires):
+            qml.RX(params[i], wires=i)
+        for j in range(num_wires-1):
+            qml.CNOT(wires=[j, j+1])
+        
+        qml.CNOT(wires=[num_wires-1, 0])
+
+        qml.RY(params[num_wires], wires=1)
+        
+        for k in range(num_wires-1):
+            qml.CNOT(wires=[k, k+1])
+    
+        qml.CNOT(wires=[num_wires-1, 0])
+
+        qml.RX(params[num_wires+1], wires=num_wires-1)
+    
+        return qml.expval(qml.PauliZ(0) @ qml.PauliZ(num_wires-1))
+
+    return qml.gradients.param_shift_hessian(qc)(w)
 
 # These functions are responsible for testing the solution.
 def run(test_case_input: str) -> str:
