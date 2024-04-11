@@ -2,12 +2,11 @@ import json
 import pennylane as qml
 import pennylane.numpy as np
 
-# Put your code here #
-
 # Create a default.qubit device with 2 qubits / wires using qml.device
-
+num_wires = 2
+dev = qml.device('default.qubit', wires=num_wires)
 # Turn your circuit into a QNode
-
+@qml.qnode(dev)
 
 def circuit(angles):
     """
@@ -21,9 +20,11 @@ def circuit(angles):
         that this circuit produces.
     """
 
-
+    theta_1 = angles[0]
+    theta_2 = angles[1]    
     # Put the rotation gates here
-
+    qml.RY(theta_1, wires = 0)
+    qml.RY(theta_2, wires = 1)
 
     return qml.probs(wires=[0, 1])
 
