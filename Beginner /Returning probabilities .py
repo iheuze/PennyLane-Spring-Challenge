@@ -2,11 +2,11 @@ import json
 import pennylane as qml
 import pennylane.numpy as np
 
-# Step 1: initialize a device
-dev = # Put your code here #
-
+# Step 1: initialize a device by the name dev
+num_wires = 2
+dev = qml.device('default.qubit', wires=num_wires)
 # Step 2: Add a decorator below
-
+@qml.qnode(dev)
 
 def simple_circuit(angle):
     """
@@ -22,14 +22,11 @@ def simple_circuit(angle):
         ground state.
     """
     
-
-
     # Step 3: Add gates to the QNode
-
-    # Put your code here #
+    qml.RX(angle, wires=0)
 
     # Step 4: Return the required probability  
-
+    return qml.probs(wires=0) 
 
 # These functions are responsible for testing the solution.
 def run(test_case_input: str) -> str:
