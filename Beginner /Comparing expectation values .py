@@ -2,8 +2,8 @@ import json
 import pennylane as qml
 import pennylane.numpy as np
 
-dev = # Define your device
-
+num_wires = 1
+dev = qml.device('default.qubit', wires=num_wires)
 
 @qml.qnode(dev)
 def circuit1(angles):
@@ -18,11 +18,15 @@ def circuit1(angles):
         (np.tensor): The expectation value of the PauliX observable
     """
 
-
     # Put your code here #
+    theta_1 = angles[0]
+    theta_2 = angles[1]
+    
+    qml.RX(theta_1, wires=0) # a single-wire parameterized gate
+    qml.RY(theta_2, wires=0) # a single-wire parameterized gate
 
     # Return the expectation value
-
+    return qml.expval(qml.PauliX(0))
 
 @qml.qnode(dev)
 def circuit2(angles):
@@ -37,10 +41,15 @@ def circuit2(angles):
         (np.tensor): The expectation value of the PauliX observable
     """
 
-
     # Put your code here #
+    theta_1 = angles[0]
+    theta_2 = angles[1]
+
+    qml.RY(theta_2, wires=0) # a single-wire parameterized gate
+    qml.RX(theta_1, wires=0) # a single-wire parameterized gate
 
     # Return the expectation value
+    return qml.expval(qml.PauliX(0))
 
 
 def compare_circuits(angles):
@@ -56,10 +65,13 @@ def compare_circuits(angles):
         values of the circuits.
     """
 
-
     # Put your code here #
+    exp_1 = circuit1(angles)
+    exp_2 = circuit2(angles)
 
+    diff = abs(exp_1 - exp_2)
     # Return the required difference in expectation values
+    return diff
 
 
 # These functions are responsible for testing the solution.
