@@ -3,10 +3,11 @@ import pennylane as qml
 import pennylane.numpy as np
 
 # Step 1: initialize a device
-dev = # Put your code here #
+num_wires = 1
+dev = qml.device('default.qubit', wires=num_wires)
 
 # Step 2: Add a decorator below
-
+@qml.qnode(dev)
 
 def simple_circuit(angle):
 
@@ -23,12 +24,12 @@ def simple_circuit(angle):
     """
     
 
-
     # Step 3: Add gates to the QNode
-
+    qml.RY(angle, wires=0) # a single-wire parameterized gate
     # Put your code here #
 
     # Step 4: Return the required expectation value 
+    return qml.expval(qml.PauliX(0))
 
 
 # These functions are responsible for testing the solution.
