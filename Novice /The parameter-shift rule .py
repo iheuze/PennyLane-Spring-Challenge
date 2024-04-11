@@ -6,14 +6,16 @@ dev = qml.device("default.qubit", wires=3)
 
 @qml.qnode(dev)
 def circuit(weights):
-    
-
-
-    # Build the circuit here
-    
+    for i in range(len(weights)):
+        qml.RX(weights[i, 0], wires=0)
+        qml.RY(weights[i, 1], wires=1)
+        qml.RZ(weights[i, 2], wires=2)
+        qml.CNOT(wires=[0, 1])
+        qml.CNOT(wires=[1, 2])
+        qml.CNOT(wires=[2, 0])
+        
     # Return the Y0xZ2 observable
-    
-
+    return qml.expval(qml.PauliY(0) @ qml.PauliZ(2))
 
 def parameter_shift(weights):
     """Compute the gradient of the variational circuit given by the
