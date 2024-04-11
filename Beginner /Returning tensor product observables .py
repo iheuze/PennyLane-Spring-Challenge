@@ -3,9 +3,10 @@ import pennylane as qml
 import pennylane.numpy as np
 
 # Step 1: initialize a device by the name dev
-
+num_wires = 2
+dev = qml.device('default.qubit', wires=num_wires)
 # Step 2: Add a decorator below
-
+@qml.qnode(dev)
 
 def simple_circuit(angle):
 
@@ -22,14 +23,13 @@ def simple_circuit(angle):
         Union[tensor, float]: the expectation value of the Z0xZ1 observable.
     """
     
-
-
     # Step 3: Add gates to the QNode
-
-    # Put your code here #
-
+    qml.Hadamard(wires=0)
+    qml.CNOT(wires=[0, 1])
+    qml.RY(angle, wires=0)
+    
     # Step 4: Return the required expectation value  
-
+    return qml.expval(qml.PauliZ(0) @ qml.PauliZ(1))
 
 # These functions are responsible for testing the solution.
 def run(test_case_input: str) -> str:
