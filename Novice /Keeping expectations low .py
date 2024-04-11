@@ -45,16 +45,28 @@ def optimize_circuit(params,hamiltonian):
         float: the value of the optimized QNode
     """
     
+    dev = qml.device("default.qubit", wires=WIRES)
 
-
-    dev = # Initialize the device.
-
-    circuit = # Instantiate the QNode from variational_circuit.
+    circuit = qml.QNode(variational_circuit, dev)
 
     # Write your code to minimize the circuit
+    # Define the optimizer
+    opt = qml.GradientDescentOptimizer(0.01)
 
-    return # Return the value of the minimized QNode
+    # Optimization loop
+    for i in range(1500):  # Increased number of iterations to 500
+        
+        # Perform optimization step
+        params = opt.step(lambda v: circuit(v, hamiltonian), params)
+        
+        # Calculate the value of the circuit after optimization
+        min_value = circuit(params, hamiltonian)
+        
+        # Print the value of the circuit
+       # print(f"Value after iteration {i+1}: {min_value}")
 
+    # Return the optimized value of the QNode
+    return min_value
 
 # These functions are responsible for testing the solution.
 def run(test_case_input: str) -> str:
