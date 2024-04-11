@@ -12,15 +12,18 @@ def get_matrix(params):
     Returns:
         - (matrix): The associated matrix to these parameters.
     """
-
-
+    
     alpha, beta, gamma, phi = params
 
     # Put your code here #
+    # Put your code here #
+    rz_gamma = qml.RZ.compute_matrix(gamma)
+    rx = qml.RX.compute_matrix(beta)
+    rz_alpha = qml.RZ.compute_matrix(alpha)
 
     # Return the matrix
-
-
+    return np.exp(1j * phi) * rz_gamma @ rx @ rz_alpha
+    
 def error(U, params):
     """
     This function determines the similarity between your generated matrix and
@@ -36,11 +39,8 @@ def error(U, params):
 
     matrix = get_matrix(params)
 
-
-    # Put your code here #
-
     # Return the error
-
+    return np.linalg.norm(U) - np.linalg.norm(matrix)
 
 def train_parameters(U):
     epochs = 1000
