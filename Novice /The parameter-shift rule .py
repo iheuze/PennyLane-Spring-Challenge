@@ -28,11 +28,23 @@ def parameter_shift(weights):
         array: The gradient of the variational circuit. The shape should match
         the input weights array.
     """
-    
-
 
     # Return the gradient calculated using the parameter-shift rule
-    
+    gradient = np.zeros_like(weights)
+    qnode = qml.QNode(circuit, dev)
+
+    for i in range(len(weights)):
+        for j in range(len(weights)):
+            copy_weight = weights.copy()
+            copy_weight[i][j] += np.pi/2
+            forward_shift = qnode(copy_weight)  
+
+            copy_weight[i][j] -= np.pi
+            backward_shift = qnode(copy_weight) 
+
+            gradient[i][j] = 0.5 * (forward_shift - backward_shift)
+    return gradient
+
 
 
 # These functions are responsible for testing the solution.
