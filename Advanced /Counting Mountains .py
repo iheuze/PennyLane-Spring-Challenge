@@ -16,6 +16,20 @@ def U(n_wires, label):
 
 
     # Put your code here #
+    # Quantum Fourier Transform
+    qml.QFT(wires=range(n_wires-1))
+
+    # convert variable into a binary string representation
+    control_1 = bin(label)[2:] 
+    control_2 = bin(2**(n_wires-1)-label)[2:]
+
+    # add leading zeros to make the strings have length n_wires-1
+    control_1 = "{:0>{length}}".format(control_1, length=n_wires-1)
+    control_2 = "{:0>{length}}".format(control_2, length=n_wires-1)
+
+    # multi-controlled X gate
+    qml.MultiControlledX(wires = range(n_wires), control_values=control_1)
+    qml.MultiControlledX(wires = range(n_wires), control_values=control_2)
 
 
 # These functions are responsible for testing the solution.
