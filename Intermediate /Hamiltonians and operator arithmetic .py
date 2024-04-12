@@ -14,10 +14,17 @@ def hamiltonian(num_wires):
         (qml.Hamiltonian): A PennyLane Hamiltonian.
     """
 
-
-    # Put your solution here #
-    return
-
+    coeffs = []
+    obs = []
+    # XiXj
+    for i in range(num_wires):
+        for j in range(i+1, num_wires):
+            coeffs.append(1/3)
+            obs.append(qml.PauliX(wires=i) @ qml.PauliX(wires=j))
+    for k in range(num_wires):
+        coeffs.append(-1)
+        obs.append(qml.PauliZ(wires=k))
+    return qml.Hamiltonian(coeffs, obs)
 
 def expectation_value(num_wires):
     """
@@ -35,8 +42,7 @@ def expectation_value(num_wires):
     # Put your solution here #
 
     # Define a device using qml.device
-    dev =
-
+    dev = qml.device('default.qubit', wires=num_wires)
 
     @qml.qnode(dev)
     def circuit(num_wires):
@@ -53,9 +59,11 @@ def expectation_value(num_wires):
 
 
         # Put Hadamard gates here #
+        for i in range(num_wires):
+            qml.Hadamard(wires=i)
 
         # Then return the expectation value of the Hamiltonian using qml.expval
-        return
+        return qml.expval(hamiltonian(num_wires))
 
 
     return circuit(num_wires)
