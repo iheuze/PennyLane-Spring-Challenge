@@ -19,16 +19,19 @@ def maximal_probability(theta_1, theta_2, p_1, p_2):
     
     """
 
-
+    # defining the states
     phi_1 = np.array([np.cos(theta_1), np.sin(theta_1)])
     phi_2 = np.array([np.cos(theta_2), np.sin(theta_2)])
 
+    # calculating q, the outer product of the states
     q_1 = np.outer(phi_1, phi_1)
     q_2 = np.outer(phi_2, phi_2)
-    
-    delta = p_1 * q_1 - p_2 * q_2
-    
-    eigenvals = np.linalg.eigvals(delta)
+
+    # finding the success probability
+    p_succ = p_1 * q_1 - p_2 * q_2
+
+    # using eigenvalues to maximise p_succ 
+    eigenvals = np.linalg.eigvals(p_succ)
 
     # Return the highest probability of distinguishing the states
     return 0.5 + 0.5 * np.sum(np.abs(eigenvals))
