@@ -23,10 +23,10 @@ def maximal_probability(theta_1, theta_2, p_1, p_2):
     phi_1 = np.array([np.cos(theta_1), np.sin(theta_1)])
     phi_2 = np.array([np.cos(theta_2), np.sin(theta_2)])
 
-    dm_1 = np.outer(phi_1, phi_1)
-    dm_2 = np.outer(phi_2, phi_2)
+    q_1 = np.outer(phi_1, phi_1)
+    q_2 = np.outer(phi_2, phi_2)
     
-    delta = p_1 * dm_1 - p_2 * dm_2
+    delta = p_1 * q_1 - p_2 * q_2
     
     eigenvals = np.linalg.eigvals(delta)
 
