@@ -28,9 +28,16 @@ def evolve_state(coeffs, time):
 
 
     # Put your code here #
+    qml.RY(0.5 * np.pi, wires=0)
+    qml.RY(0.4 , wires=1)
+    qml.RY(1.2 , wires=2)
+    qml.RY(1.8 , wires=3)
+    qml.RY(0.6 , wires=4)
+
+    qml.ApproxTimeEvolution(qml.Hamiltonian(coeffs, operators), time, n=1)
 
     # Return the required density matrix.
-
+    return qml.density_matrix(wires=0)
 
 def purity(rho):
     """
@@ -42,11 +49,10 @@ def purity(rho):
 
     """
 
-
     # Put your code here
-
+    purity = qml.math.purity(rho, [0,1,2,3,4])
     # Return the purity
-
+    return purity
 
 def recoherence_time(coeffs):
     """
@@ -58,9 +64,17 @@ def recoherence_time(coeffs):
 
     """
 
-
     # Return the recoherence time
-
+    t = 0.1
+    max_iter = 10000
+    iteration = 0
+    while iteration < max_iter:
+        rho = evolve_state(coeffs, t)  
+        if np.isclose(purity(rho), 1, rtol=0.01):  
+            break
+        t += 0.01  
+        iteration += 1
+    return t
 
 # These functions are responsible for testing the solution.
 def run(test_case_input: str) -> str:
