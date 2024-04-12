@@ -19,9 +19,10 @@ def evolve_atom_cat(unitary, params):
         (np.tensor): The state of the joint atom-cat system after unitary evolution.
     """
 
-
     # Put your code here # 
-
+    qml.QubitUnitary(unitary, wires=['atom', 'cat'])
+    qml.U3(*params, wires='atom')
+    return qml.state()
 
 def u3_parameters(unitary):
 
@@ -37,13 +38,22 @@ def u3_parameters(unitary):
         a uniform superposition for the cat when the atom is measured in the
         state |0>.
     """
-    
-
 
     # Put your code here #
+    atom = np.array([[1.], [0.]]) 
+    cat = np.array([[1.], [0.]])  
+    state = np.kron(atom, cat)  
+
+    evolved_state = unitary @ state
+
+    a, b, c, d = float(evolved_state[0]), float(evolved_state[1]), float(evolved_state[2]), float(evolved_state[3])
+
+    lhs = (a - b) / ((c - d) * (np.cos(np.pi) - complex(0, np.sin(np.pi))))
+    angle_theta = np.arctan(lhs) * 2
 
     # Return a set of parameters that satisfy the required condition
-
+    params = np.array([angle_theta, 0, np.pi])
+    return params
 
 # These functions are responsible for testing the solution.
 def run(test_case_input: str) -> str:
