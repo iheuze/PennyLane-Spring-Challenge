@@ -5,15 +5,15 @@
 ## Good Day Sunshine 
 To earn this badge, I had to complete all the beginner and novice challenges 
 ### Beginner Challenges
-#### Comparing Expectation Values
+#### [Comparing Expectation Values](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Beginner%20/Comparing%20expectation%20values%20.py)
 - Investigate how different gate orderings affect measurement outcomes
-#### Returning Expectation Values
+#### [Returning Expectation Values](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Beginner%20/Returning%20expectation%20values%20.py)
 - Build a simple PennyLane circuit and return the expectation value of an observable
-#### Returning Expectation Values
+#### [Returning Probabilities](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Beginner%20/Returning%20probabilities%20.py)
 - Build a simple PennyLane circuit and return the measurement probabilities
-#### Returning Expectation Values
+#### [Returning Tensor Product Observables](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Beginner%20/Returning%20tensor%20product%20observables%20.py)
 - Return the expectation value of a two-qubit observable
-#### States and Probabilities 
+#### [States and Probabilities](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Beginner%20/States%20and%20probabilities%20.py) 
 - Prepare a two-qubit state and measure output probabilities
 
 ### Novice Challenges
