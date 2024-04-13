@@ -54,6 +54,32 @@ def approximation_ratio(qaoa_depth, noise_param):
 
 
     # Put your code here #
+    # naming things for later use
+    optimiser = qml.GradientDescentOptimizer()
+    steps = 500
+    params = np.random.randn(qaoa_depth, 2, requires_grad=True)
+    
+    qaoa_circuit(params, noise_param)
+
+    # defining a cost function
+    def cost_function(params):
+        return qaoa_circuit(params, noise_param)
+
+    # looping to find the parameters
+    for i in range(steps):
+        params = optimiser.step(cost_function, params)
+        if i % 50 == 0:
+            print ("Iteration", i, "complete" )
+    
+    noisy_min_expval = qaoa_circuit(params, noise_param)
+
+    # calculating the approximation ratio
+    # normal way to find eigenvalues takes too long so I added in the sparse_matrix and todense stuff
+    ideal_min_val = np.min(np.linalg.eigvalsh(cost_hamiltonian.sparse_matrix().todense()))
+
+    ratio = noisy_min_expval / ideal_min_val
+    return ratio
+
 
 
 # These functions are responsible for testing the solution.
