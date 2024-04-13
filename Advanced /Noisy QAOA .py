@@ -39,7 +39,9 @@ def qaoa_circuit(params, noise_param):
     # Put your code here #
     # initial rotation gates on all qubits
     for i in range(num_wires):
-        qml.RY(0.5*np.pi, i)
+        qml.RZ(np.pi/2, wires=i)
+        qml.RX(np.pi/2, wires=i)
+        qml.RZ(np.pi/2, wires=i)
 
     # applying layers
     for gamma, beta in params:
