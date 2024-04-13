@@ -37,6 +37,32 @@ def qaoa_circuit(params, noise_param):
 
 
     # Put your code here #
+    # initial rotation gates on all qubits
+    for i in range(num_wires):
+        qml.RY(0.5*np.pi, i)
+
+    # applying layers
+    for gamma, beta in params:
+        #  for Z terms
+        for i, coeff in enumerate([0.5, 0.5, 1.25, -0.25]):
+            qml.RZ(2 * gamma * coeff, wires=i)
+
+        # for ZZ terms
+        for j, coeff in [([0, 1], 0.75), ([0, 2], 0.75), ([1, 2], 0.75), ([2, 3], 0.75)]:
+            qml.CNOT(wires=j)
+            qml.RZ(2 * gamma * coeff, wires=j[1])
+            qml.CNOT(wires=j)
+            qml.DepolarizingChannel(noise_param, wires=j[1])
+
+        #  mixer
+        for i in range(num_wires):
+            qml.RX(2 * beta, wires=i)
+            qml.RY(2 * 0.0001, wires=i)
+            qml.RY(-2 * 0.0001, wires=i)
+            qml.DepolarizingChannel(noise_param, wires=i)
+
+    # Return the expectation value of the cost Hamiltonian
+    return qml.expval(cost_hamiltonian)
 
 
 def approximation_ratio(qaoa_depth, noise_param):
