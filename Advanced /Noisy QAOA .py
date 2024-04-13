@@ -83,7 +83,7 @@ def approximation_ratio(qaoa_depth, noise_param):
 
     # Put your code here #
     # naming things for later use
-    optimiser = qml.GradientDescentOptimizer()
+    optimiser = qml.RMSPropOptimizer()
     steps = 500
     params = np.random.randn(qaoa_depth, 2, requires_grad=True)
     
