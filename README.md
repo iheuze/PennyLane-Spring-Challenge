@@ -17,17 +17,17 @@ To earn this badge, I had to complete all the beginner and novice challenges
 - Prepare a two-qubit state and measure output probabilities
 
 ### Novice Challenges
-#### A Simple Trotterization
+#### [A Simple Trotterization](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Novice%20/A%20simple%20Trotterization%20.py)
 - Implement the unitary evolution of a Hamiltonian using a quantum circuit
-#### Keeping Expectations Low
+#### [Keeping Expectations Low](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Novice%20/A%20simple%20Trotterization%20.py)
 - Write an optimisation routine to minimise the expectation value of an observable.
-#### My first quantum simulation
+#### [My first quantum simulation](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Novice%20/My%20first%20quantum%20simulation%20.py)
 - Build a toy version of PennyLane using numpy
-#### The Hessian of a Circuit
+#### [The Hessian of a Circuit](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Novice%20/The%20Hessian%20of%20a%20circuit%20.py)
 - Use the parameter-shift rule to calculate the Hessian of a variational circuit
-#### The Parameter-Shift Rule
+#### [The Parameter-Shift Rule](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Novice%20/The%20parameter-shift%20rule%20.py)
 - Use the parameter-shift rule to calculate the gradient of a variational circuit
-#### Universality of Single-Qubit Gates
+#### [Universality of Single-Qubit Gates](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Novice%20/Universality%20of%20single-qubit%20gates%20.py)
 - Create an arbitrary single-qubit gate using rotations
 
 ## Rain Shine Bloom
