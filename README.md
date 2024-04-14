@@ -33,13 +33,13 @@ To earn this badge, I had to complete all the beginner and novice challenges
 ## Rain Shine Bloom
 To earn this badge, I had to complete all the intermediate and advanced challenges 
 ### Intermediate Challenges
-#### Hamiltonians and Operator Arithmetic
+#### [Hamiltonians and Operator Arithmetic](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Intermediate%20/Hamiltonians%20and%20operator%20arithmetic%20.py)
 - Create a given Hamiltonian using operator arithmetic
-#### Quantum State Discrimination
+#### [Quantum State Discrimination](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Intermediate%20/Quantum%20state%20discrimination%20.py)
 - Distinguish two qubit states from each other with one measurement 
-#### Recoherence
+#### [Recoherence](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Intermediate%20/Recoherence%20.py)
 - Find the recoherence time for a simple 5-spin system
-#### Revisiting Schrodinger's Cat
+#### [Revisiting Schrodinger's Cat](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Intermediate%20/Revisiting%20Schrodinger's%20cat%20.py)
 - Design an experiment to make a zombie cat
 
 ### Advanced Challenges
