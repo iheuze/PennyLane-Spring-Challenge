@@ -43,10 +43,10 @@ To earn this badge, I had to complete all the intermediate and advanced challeng
 - Design an experiment to make a zombie cat
 
 ### Advanced Challenges
-#### Counting Mountains
+#### [Counting Mountains](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Advanced%20/Counting%20Mountains%20.py)
 - Create a circuit that determines whether quantum states have as many mountains as we think they do
-#### Noisy QAOA
+#### [Noisy QAOA](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Advanced%20/Noisy%20QAOA%20.py)
 - Find the approximation ratio of a noisy QAOA (Quantum Approximate Optimisation Algorithm) circuit
-#### The Oracle of the Exact Distance
+#### [The Oracle of the Exact Distance](https://github.com/iheuze/PennyLane-Spring-Challenge/blob/main/Advanced%20/The%20oracle%20of%20the%20exact%20distance%20.py)
 - Build an oracle that determines if two states are separated by a given distance
 
