@@ -39,21 +39,22 @@ def qaoa_circuit(params, noise_param):
     # Put your code here #
     # initial rotation gates on all qubits
     for i in range(num_wires):
-        qml.RZ(np.pi/2, wires=i)
-        qml.RX(np.pi/2, wires=i)
-        qml.RZ(np.pi/2, wires=i)
+        qml.RZ(0.5*np.pi, wires=i)
+        qml.RX(0.5*np.pi, wires=i)
+        qml.RZ(0.5*np.pi, wires=i)
 
     # applying layers
     for gamma, beta in params:
         #  for Z terms
-        for i, coeff in enumerate([0.5, 0.5, 1.25, -0.25]):
+        for i, coeff in [(0, 0.5), (1, 0.5), (2, 1.25), (3, -0.25)]:
             qml.RZ(2 * gamma * coeff, wires=i)
 
         # for ZZ terms
         for j, coeff in [([0, 1], 0.75), ([0, 2], 0.75), ([1, 2], 0.75), ([2, 3], 0.75)]:
-            qml.CNOT(wires=j)
+            qml.CNOT(wires=[j[0], j[1]])
             qml.RZ(2 * gamma * coeff, wires=j[1])
-            qml.CNOT(wires=j)
+            qml.CNOT(wires=[j[0], j[1]])
+            
             qml.DepolarizingChannel(noise_param, wires=j[1])
 
         #  mixer
@@ -85,7 +86,7 @@ def approximation_ratio(qaoa_depth, noise_param):
     # naming things for later use
     optimiser = qml.RMSPropOptimizer()
     steps = 500
-    params = np.random.randn(qaoa_depth, 2, requires_grad=True)
+    params = np.random.uniform(0, 2*np.pi, (qaoa_depth, 2))
     
     qaoa_circuit(params, noise_param)
 
@@ -96,8 +97,6 @@ def approximation_ratio(qaoa_depth, noise_param):
     # looping to find the parameters
     for i in range(steps):
         params = optimiser.step(cost_function, params)
-        if i % 50 == 0:
-            print ("Iteration", i, "complete" )
     
     noisy_min_expval = qaoa_circuit(params, noise_param)
 
